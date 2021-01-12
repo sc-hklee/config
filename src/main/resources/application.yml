@@ -1,0 +1,35 @@
+server:
+  port: ${service_port:9001}
+spring:
+  application: 
+    name: config
+   
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+---
+management:
+  endpoints:
+    web:
+      exposure: 
+        include: bus-refresh
+            
+---
+spring:
+  cloud:
+    config:
+      server:        
+        git:
+          uri: https://${git_host:github.com}:${git_port:443}/${git_org:hc-hklee}/${git_repo:configmng.git}
+          username: ${git_id:happycloudpak}
+          password: ${git_pw:passw0rd$}                            
+          search-paths: /*                       #base directory to search profiles
+          default-label: ${git_branch:main}      #git branch
+          
+  rabbitmq:
+    host: ${mq_host:localhost}
+    port: ${mq_port:5672}
+    username: ${mq_id:guest}
+    password: ${mq_pw:guest}
