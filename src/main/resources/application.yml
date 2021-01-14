@@ -23,8 +23,8 @@ spring:
           search-paths: /*                       #base directory to search profiles
           default-label: ${git_branch:main}      #git branch
           
-    bus:
-      enabled: true
+    #bus:
+    #  enabled: true
 
   rabbitmq:
     host: ${mq_host:169.56.84.41}
