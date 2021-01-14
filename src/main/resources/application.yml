@@ -24,7 +24,9 @@ spring:
           default-label: ${git_branch:main}      #git branch
           
   rabbitmq:
-    host: ${mq_host:localhost}
-    port: ${mq_port:5672}
+    host: ${mq_host:169.56.84.41}
+    port: ${mq_port:31060}
     username: ${mq_id:guest}
     password: ${mq_pw:guest}
+  bus:
+    enabled: true
