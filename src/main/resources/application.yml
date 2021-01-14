@@ -22,7 +22,6 @@ spring:
           password: ${git_pw:happy@cloud0}                            
           #search-paths: /*                       #base directory to search profiles
           search-paths:
-          - '/*'
           - 'webhook*'
           default-label: ${git_branch:main}      #git branch
           
