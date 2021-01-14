@@ -37,11 +37,11 @@
 			</exclusions>
 		</dependency>
 		
-		<!--  mq -->
+		<!-- 		
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-bus-amqp</artifactId>			
-		</dependency>
+		</dependency> -->
 		
 		<!-- config-monitor -->
 		<dependency>
