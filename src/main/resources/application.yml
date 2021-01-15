@@ -31,4 +31,7 @@ spring:
     port: ${mq_port:31060}
     username: ${mq_id:guest}
     password: ${mq_pw:guest}
-    
+  
+  main:
+    allow-bean-definition-overriding: true  
+  
