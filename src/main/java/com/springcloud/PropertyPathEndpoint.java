@@ -96,6 +96,7 @@ public class PropertyPathEndpoint implements ApplicationEventPublisherAware {
 				else if (!name.startsWith("application")) {
 					int index2 = name.indexOf("/");
 					if(index2 >= 0) {
+						log.info("find sub-dir:"+name.substring(0,index2));
 						services.add(name.substring(0,index2));
 					} else {
 						services.add(name + ":" + profile);
