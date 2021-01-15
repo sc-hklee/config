@@ -82,6 +82,8 @@ public class PropertyPathEndpoint implements ApplicationEventPublisherAware {
 	}
 
 	private Set<String> guessServiceName(String path) {
+		System.out.println("path: "+ path);
+		
 		Set<String> services = new LinkedHashSet<>();
 		if (path != null) {
 			String stem = StringUtils.stripFilenameExtension(StringUtils.getFilename(StringUtils.cleanPath(path)));
