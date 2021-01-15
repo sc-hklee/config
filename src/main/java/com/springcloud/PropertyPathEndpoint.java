@@ -37,6 +37,7 @@ public class PropertyPathEndpoint implements ApplicationEventPublisherAware {
 	private String busId;
 
 	public PropertyPathEndpoint(PropertyPathNotificationExtractor extractor, String busId) {
+		System.out.println("############# OVERRIDING ###############");
 		this.extractor = extractor;
 		this.busId = busId;
 	}
