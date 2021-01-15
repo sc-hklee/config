@@ -1,4 +1,4 @@
-package com.springcloud;
+package org.springframework.cloud.config.monitor;
 
 import java.util.Collections;
 import java.util.HashMap;
