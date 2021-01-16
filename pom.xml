@@ -47,7 +47,7 @@
 		<!--  <dependency>
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-stream-rabbit</artifactId>
-		</dependency> -->
+		</dependency> --> <!-- bus-amqp만 있어도  -->
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-config-monitor</artifactId>			
