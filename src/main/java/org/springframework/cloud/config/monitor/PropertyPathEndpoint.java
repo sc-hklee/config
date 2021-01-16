@@ -54,12 +54,14 @@ public class PropertyPathEndpoint implements ApplicationEventPublisherAware {
 
 	@RequestMapping(method = RequestMethod.POST)
 	public Set<String> notifyByPath(@RequestHeader HttpHeaders headers, @RequestBody Map<String, Object> request) {
+		
 		PropertyPathNotification notification = this.extractor.extract(headers, request);
 		if (notification != null) {
 
 			Set<String> services = new LinkedHashSet<>();
 
 			for (String path : notification.getPaths()) {
+				System.out.println("### PATH => "+ path);
 				services.addAll(guessServiceName(path));
 			}
 			if (this.applicationEventPublisher != null) {
@@ -84,7 +86,6 @@ public class PropertyPathEndpoint implements ApplicationEventPublisherAware {
 	}
 
 	private Set<String> guessServiceName(String path) {
-		System.out.println("path: "+ path);
 		
 		Set<String> services = new LinkedHashSet<>();
 		if (path != null) {
@@ -98,9 +99,12 @@ public class PropertyPathEndpoint implements ApplicationEventPublisherAware {
 					services.add("*:" + profile);
 				}
 				else if (!name.startsWith("application")) {
+					System.out.println("# name: "+ name);
 					int index2 = name.indexOf("/");
+					System.out.println("# index of / "+ index2);
 					if(index2 >= 0) {
-						log.info("find sub-dir:"+name.substring(0,index2));
+						
+						System.out.println("# service added: "+ name.substring(0,index2));
 						services.add(name.substring(0,index2));
 					} else {
 						services.add(name + ":" + profile);
