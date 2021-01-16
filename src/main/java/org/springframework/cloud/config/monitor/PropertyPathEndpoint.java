@@ -38,7 +38,6 @@ public class PropertyPathEndpoint implements ApplicationEventPublisherAware {
 	private String busId;
 
 	public PropertyPathEndpoint(PropertyPathNotificationExtractor extractor, String busId) {
-		System.out.println("############# OVERRIDING ###############");
 		this.extractor = extractor;
 		this.busId = busId;
 	}
@@ -61,7 +60,6 @@ public class PropertyPathEndpoint implements ApplicationEventPublisherAware {
 			Set<String> services = new LinkedHashSet<>();
 
 			for (String path : notification.getPaths()) {
-				System.out.println("### PATH => "+ path);
 				services.addAll(guessServiceName(path));
 			}
 			if (this.applicationEventPublisher != null) {
@@ -98,12 +96,9 @@ public class PropertyPathEndpoint implements ApplicationEventPublisherAware {
 				if ("application".equals(name)) {
 					services.add("*:" + profile);
 				}
-				else if (!name.startsWith("application")) {
-					System.out.println("# name: "+ name);
-					
-					services.add(name);
-					services.add(name + ":" + profile);
-					
+				else if (!name.startsWith("application")) {				
+					//services.add(name);	//ADD Only service name. ex) if svc1-prod.yml, add 'svc1'
+					services.add("*:"+name + ":" + profile);
 				}
 				index = stem.indexOf("-", index + 1);
 			}
