@@ -1,3 +1,19 @@
+/*
+ * Copyright 2015-2019 the original author or authors.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package org.springframework.cloud.config.monitor;
 
 import java.util.Collections;
@@ -9,10 +25,8 @@ import java.util.Set;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+
 import org.springframework.cloud.bus.event.RefreshRemoteApplicationEvent;
-import org.springframework.cloud.config.monitor.PropertyPathEndpoint;
-import org.springframework.cloud.config.monitor.PropertyPathNotification;
-import org.springframework.cloud.config.monitor.PropertyPathNotificationExtractor;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.context.ApplicationEventPublisherAware;
 import org.springframework.http.HttpHeaders;
@@ -25,6 +39,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+/**
+ * HTTP endpoint for webhooks coming from repository providers.
+ *
+ * @author Dave Syer
+ *
+ */
 @RestController
 @RequestMapping(path = "${spring.cloud.config.monitor.endpoint.path:}/monitor")
 public class PropertyPathEndpoint implements ApplicationEventPublisherAware {
@@ -53,7 +73,6 @@ public class PropertyPathEndpoint implements ApplicationEventPublisherAware {
 
 	@RequestMapping(method = RequestMethod.POST)
 	public Set<String> notifyByPath(@RequestHeader HttpHeaders headers, @RequestBody Map<String, Object> request) {
-		
 		PropertyPathNotification notification = this.extractor.extract(headers, request);
 		if (notification != null) {
 
@@ -84,7 +103,6 @@ public class PropertyPathEndpoint implements ApplicationEventPublisherAware {
 	}
 
 	private Set<String> guessServiceName(String path) {
-		
 		Set<String> services = new LinkedHashSet<>();
 		if (path != null) {
 			String stem = StringUtils.stripFilenameExtension(StringUtils.getFilename(StringUtils.cleanPath(path)));
@@ -96,10 +114,10 @@ public class PropertyPathEndpoint implements ApplicationEventPublisherAware {
 				if ("application".equals(name)) {
 					services.add("*:" + profile);
 				}
-				else if (!name.startsWith("application")) {				
+				else if (!name.startsWith("application")) {
 					services.add(name + ":" + profile);
 					
-					//services.add(name);	//ADD Only service name. ex) if svc1-prod.yaml, add 'svc1'
+					services.add(name); //ADD Only service name. ex) if svc1-prod.yaml, add 'svc1'.
 				}
 				index = stem.indexOf("-", index + 1);
 			}
