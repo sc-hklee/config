@@ -100,15 +100,10 @@ public class PropertyPathEndpoint implements ApplicationEventPublisherAware {
 				}
 				else if (!name.startsWith("application")) {
 					System.out.println("# name: "+ name);
-					int index2 = name.indexOf("/");
-					System.out.println("# index of / "+ index2);
-					if(index2 >= 0) {
-						
-						System.out.println("# service added: "+ name.substring(0,index2));
-						services.add(name.substring(0,index2));
-					} else {
-						services.add(name + ":" + profile);
-					}
+					
+					services.add(name);
+					services.add(name + ":" + profile);
+					
 				}
 				index = stem.indexOf("-", index + 1);
 			}
