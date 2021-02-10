@@ -4,7 +4,7 @@ spring:
   application: 
     name: config
    
----
+# Actuator endpoints
 management.endpoints.web.exposure.include: health, metrics, bus-refresh
 
 ---
