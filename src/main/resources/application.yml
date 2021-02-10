@@ -5,12 +5,8 @@ spring:
     name: config
    
 ---
-# management:
-#   endpoints:
-#     web:
-#       exposure: 
-#         include: bus-refresh
-            
+management.endpoints.web.exposure.include: health, metrics, bus-refresh
+
 ---
 spring:
   cloud:
